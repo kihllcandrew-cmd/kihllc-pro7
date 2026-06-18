@@ -2537,19 +2537,8 @@ nav::after {
   <!-- Ticker tape -->
   <div style="overflow:hidden;background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.2);border-radius:8px;padding:8px 0;margin-bottom:14px;position:relative">
     <div id="cnbc-ticker" style="display:flex;gap:40px;animation:tickerScroll 40s linear infinite;white-space:nowrap;padding:0 20px;font-family:var(--mono);font-size:11px;width:max-content">
-      <span style="color:#ef4444;font-weight:700">▶ CNBC LIVE</span>
-      <span style="color:var(--tx3)">S&P 500 ▲ 0.42%</span><span style="color:var(--tx5)">|</span>
-      <span style="color:var(--tx3)">NASDAQ ▲ 0.61%</span><span style="color:var(--tx5)">|</span>
-      <span style="color:#f87171">DOW ▼ 0.12%</span><span style="color:var(--tx5)">|</span>
-      <span style="color:var(--tx3)">VIX 18.4 ▼ 2.1%</span><span style="color:var(--tx5)">|</span>
-      <span style="color:var(--green-l)">GOLD $2,341 ▲ 0.8%</span><span style="color:var(--tx5)">|</span>
-      <span style="color:var(--tx3)">BTC $67,400 ▲ 1.2%</span><span style="color:var(--tx5)">|</span>
-      <span style="color:var(--tx3)">10Y Yield 4.42%</span><span style="color:var(--tx5)">|</span>
-      <span style="color:var(--tx3)">DXY 104.2</span><span style="color:var(--tx5)">|</span>
-      <span style="color:var(--green-l)">WTI OIL $78.40 ▲ 0.5%</span>
-      <span style="color:#ef4444;font-weight:700">▶ CNBC LIVE</span>
-      <span style="color:var(--tx3)">S&P 500 ▲ 0.42%</span><span style="color:var(--tx5)">|</span>
-      <span style="color:var(--tx3)">NASDAQ ▲ 0.61%</span>
+      <span style="color:#ef4444;font-weight:700">▶ LIVE MARKETS</span>
+      <span style="color:var(--tx4)">Loading live prices…</span>
     </div>
   </div>
   <style>@keyframes tickerScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }</style>
@@ -2558,33 +2547,33 @@ nav::after {
   <div id="cnbc-sentiment-row" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:16px">
     <div style="background:var(--navy3);border:1px solid var(--bd);border-radius:8px;padding:12px;text-align:center">
       <div style="font-size:9px;font-family:var(--mono);color:var(--tx4);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">S&P 500</div>
-      <div style="font-size:15px;font-weight:800;font-family:var(--mono);color:var(--green-l)">+0.42%</div>
-      <div style="font-size:10px;color:var(--tx4);font-family:var(--mono)">5,241.38</div>
+      <div id="mc-spx-pct" style="font-size:15px;font-weight:800;font-family:var(--mono);color:var(--tx4)">—</div>
+      <div id="mc-spx-px" style="font-size:10px;color:var(--tx4);font-family:var(--mono)">loading…</div>
     </div>
     <div style="background:var(--navy3);border:1px solid var(--bd);border-radius:8px;padding:12px;text-align:center">
       <div style="font-size:9px;font-family:var(--mono);color:var(--tx4);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">NASDAQ</div>
-      <div style="font-size:15px;font-weight:800;font-family:var(--mono);color:var(--green-l)">+0.61%</div>
-      <div style="font-size:10px;color:var(--tx4);font-family:var(--mono)">16,384.47</div>
+      <div id="mc-ndx-pct" style="font-size:15px;font-weight:800;font-family:var(--mono);color:var(--tx4)">—</div>
+      <div id="mc-ndx-px" style="font-size:10px;color:var(--tx4);font-family:var(--mono)">loading…</div>
     </div>
     <div style="background:var(--navy3);border:1px solid var(--bd);border-radius:8px;padding:12px;text-align:center">
       <div style="font-size:9px;font-family:var(--mono);color:var(--tx4);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">VIX</div>
-      <div style="font-size:15px;font-weight:800;font-family:var(--mono);color:var(--green-l)">18.4</div>
-      <div style="font-size:10px;color:var(--tx4);font-family:var(--mono)">Fear Low</div>
+      <div id="mc-vix-px" style="font-size:15px;font-weight:800;font-family:var(--mono);color:var(--tx4)">—</div>
+      <div id="mc-vix-lbl" style="font-size:10px;color:var(--tx4);font-family:var(--mono)">loading…</div>
     </div>
     <div style="background:var(--navy3);border:1px solid var(--bd);border-radius:8px;padding:12px;text-align:center">
       <div style="font-size:9px;font-family:var(--mono);color:var(--tx4);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">10Y YIELD</div>
-      <div style="font-size:15px;font-weight:800;font-family:var(--mono);color:var(--blue-ll)">4.42%</div>
-      <div style="font-size:10px;color:var(--tx4);font-family:var(--mono)">▲ 0.03</div>
+      <div id="mc-tnx-px" style="font-size:15px;font-weight:800;font-family:var(--mono);color:var(--tx4)">—</div>
+      <div id="mc-tnx-pct" style="font-size:10px;color:var(--tx4);font-family:var(--mono)">loading…</div>
     </div>
     <div style="background:var(--navy3);border:1px solid var(--bd);border-radius:8px;padding:12px;text-align:center">
       <div style="font-size:9px;font-family:var(--mono);color:var(--tx4);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">GOLD</div>
-      <div style="font-size:15px;font-weight:800;font-family:var(--mono);color:var(--gold-l)">$2,341</div>
-      <div style="font-size:10px;color:var(--tx4);font-family:var(--mono)">▲ 0.8%</div>
+      <div id="mc-gold-px" style="font-size:15px;font-weight:800;font-family:var(--mono);color:var(--tx4)">—</div>
+      <div id="mc-gold-pct" style="font-size:10px;color:var(--tx4);font-family:var(--mono)">loading…</div>
     </div>
     <div style="background:var(--navy3);border:1px solid var(--bd);border-radius:8px;padding:12px;text-align:center">
       <div style="font-size:9px;font-family:var(--mono);color:var(--tx4);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">DXY</div>
-      <div style="font-size:15px;font-weight:800;font-family:var(--mono);color:var(--tx1)">104.2</div>
-      <div style="font-size:10px;color:var(--tx4);font-family:var(--mono)">▼ 0.1%</div>
+      <div id="mc-dxy-px" style="font-size:15px;font-weight:800;font-family:var(--mono);color:var(--tx4)">—</div>
+      <div id="mc-dxy-pct" style="font-size:10px;color:var(--tx4);font-family:var(--mono)">loading…</div>
     </div>
   </div>
 
@@ -2951,9 +2940,58 @@ nav::after {
     if(el) { const now=new Date(); el.textContent='Updated: '+now.toLocaleTimeString('en-US',{timeZone:'America/New_York'})+' EST'; }
   }
 
+  // ── LIVE MARKET BAR — real prices via /api/quote (no hardcoded numbers) ──────
+  // Populates the scrolling ticker + the 6 sentiment cards from the live feed.
+  // Anything that doesn't return shows "—" / "no data" — never a fake number.
+  const _MKT_BAR = [
+    { tk:'^GSPC',     lbl:'S&P 500', pxId:'mc-spx-px',  pctId:'mc-spx-pct', dec:2, money:false },
+    { tk:'^IXIC',     lbl:'NASDAQ',  pxId:'mc-ndx-px',  pctId:'mc-ndx-pct', dec:2, money:false },
+    { tk:'^VIX',      lbl:'VIX',     pxId:'mc-vix-px',  pctId:'mc-vix-lbl', dec:2, money:false, vix:true },
+    { tk:'^TNX',      lbl:'10Y',     pxId:'mc-tnx-px',  pctId:'mc-tnx-pct', dec:2, money:false, pctSuffix:'%' },
+    { tk:'GC=F',      lbl:'GOLD',    pxId:'mc-gold-px', pctId:'mc-gold-pct',dec:2, money:true  },
+    { tk:'DX-Y.NYB',  lbl:'DXY',     pxId:'mc-dxy-px',  pctId:'mc-dxy-pct', dec:2, money:false },
+  ];
+
+  async function refreshCNBCMarketBar() {
+    const results = await Promise.allSettled(_MKT_BAR.map(m => fetchTVPrice(m.tk)));
+    const tickerParts = ['<span style="color:#ef4444;font-weight:700">▶ LIVE MARKETS</span>'];
+    results.forEach((r, i) => {
+      const m = _MKT_BAR[i];
+      const pxEl  = document.getElementById(m.pxId);
+      const pctEl = document.getElementById(m.pctId);
+      if (r.status === 'fulfilled' && r.value && isFinite(r.value.p)) {
+        const { p, pct } = r.value;
+        const up = pct >= 0;
+        const col = up ? 'var(--green-l)' : '#f87171';
+        const pxStr  = (m.money ? '$' : '') + p.toLocaleString('en-US', {minimumFractionDigits:m.dec, maximumFractionDigits:m.dec});
+        const pctStr = (up ? '▲ ' : '▼ ') + Math.abs(pct).toFixed(2) + '%';
+        if (pxEl)  { pxEl.textContent = m.vix ? p.toFixed(2) : pxStr; pxEl.style.color = m.money ? 'var(--gold-l)' : 'var(--tx1)'; }
+        if (pctEl) {
+          if (m.vix)            pctEl.textContent = p < 15 ? 'Fear Low' : p > 25 ? 'Fear High' : 'Fear Mid';
+          else if (m.pctSuffix) pctEl.textContent = p.toFixed(2) + m.pctSuffix;
+          else                  { pctEl.textContent = pctStr; pctEl.style.color = col; }
+        }
+        tickerParts.push(`<span style="color:${col}">${m.lbl} ${pxStr} ${pctStr}</span>`);
+        tickerParts.push('<span style="color:var(--tx5)">|</span>');
+      } else {
+        if (pxEl)  { pxEl.textContent = '—'; pxEl.style.color = 'var(--tx4)'; }
+        if (pctEl) { pctEl.textContent = 'no data'; pctEl.style.color = 'var(--tx4)'; }
+        tickerParts.push(`<span style="color:var(--tx4)">${m.lbl} —</span>`);
+        tickerParts.push('<span style="color:var(--tx5)">|</span>');
+      }
+    });
+    // duplicate the run so the scroll animation loops seamlessly
+    const loop = tickerParts.slice(1).join('');
+    const bar = document.getElementById('cnbc-ticker');
+    if (bar) bar.innerHTML = tickerParts.join('') + loop;
+  }
+  window.refreshCNBCMarketBar = refreshCNBCMarketBar;
+
   // Auto-load on page load
   setTimeout(fetchCNBCNews, 1200);
-  setInterval(()=>{ if(cnbcLoaded) renderCNBCNews(); }, 600000); // refresh every 10min
+  setTimeout(refreshCNBCMarketBar, 1500);
+  setInterval(()=>{ if(cnbcLoaded) renderCNBCNews(); }, 600000); // refresh news every 10min
+  setInterval(refreshCNBCMarketBar, 600000); // refresh live prices every 10min
 
   // ── WATCHLIST SCANNER — LIVE DATA ENGINE ────────────────────────────────────
   // Maps scanner categories → ASSETS entries with their Yahoo Finance tickers
