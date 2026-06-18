@@ -7010,21 +7010,14 @@ async function fetchPriceData(ticker) {
 async function loadTicker() {
   const bar = document.getElementById('tkr');
   if (!bar) return;
-  const res = await Promise.allSettled(WATCH_TICKERS.map(t => fetchOne(t)));
+  // Stagger requests 250ms apart — stays well under Twelve Data 8 calls/min limit
   bar.innerHTML = '';
-  res.forEach((r, i) => {
-    const tk = WATCH_TICKERS[i], lbl = WATCH_LABELS[tk], cc = WATCH_CC[tk] || 'c';
+  for (let i = 0; i < WATCH_TICKERS.map(t => t).length; i++) {
+    const tk = WATCH_TICKERS[i];
+    const lbl = WATCH_LABELS[tk], cc = WATCH_CC[tk] || 'c';
     const el = document.createElement('div');
     el.className = 'tk';
-    if (r.status === 'fulfilled' && r.value) {
-      const {p, prev} = r.value;
-      liveP[tk] = p;
-      const chg = p - prev, pct = (chg / prev * 100);
-      const fmt = p < 10 ? p.toFixed(5) : p.toFixed(2);
-      el.innerHTML = `<div class="tk-sym">${lbl}</div><div class="tk-px ${chg >= 0 ? 'up' : 'dn'}">${fmt}</div><div class="tk-ch ${chg >= 0 ? 'up' : 'dn'}">${chg >= 0 ? '▲' : '▼'} ${Math.abs(pct).toFixed(2)}%</div><span class="tk-badge live-badge">LIVE</span>`;
-    } else {
-      el.innerHTML = `<div class="tk-sym">${lbl}</div><div class="tk-px" style="color:var(--t4)">—</div><div class="tk-ch" style="color:var(--t4)">no data</div><span class="tk-badge sim-badge">N/A</span>`;
-    }
+    el.innerHTML = `<div class="tk-sym">${lbl}</div><div class="tk-px" style="color:var(--t4)">...</div><div class="tk-ch" style="color:var(--t4)"></div>`;
     el.onclick = () => {
       document.querySelectorAll('.tk').forEach(t => t.classList.remove('sel'));
       el.classList.add('sel');
@@ -7032,7 +7025,27 @@ async function loadTicker() {
       loadChart(aObj, curCTF);
     };
     bar.appendChild(el);
-  });
+    // Fetch and update each ticker individually with stagger
+    (async (tk, lbl, cc, el) => {
+      await new Promise(r => setTimeout(r, i * 250));
+      const r = await fetchOne(tk).catch(() => null);
+      if (r) {
+        const {p, prev} = r;
+        liveP[tk] = p;
+        const chg = p - prev, pct = (chg / prev * 100);
+        const fmt = p < 10 ? p.toFixed(5) : p.toFixed(2);
+        el.innerHTML = `<div class="tk-sym">${lbl}</div><div class="tk-px ${chg >= 0 ? 'up' : 'dn'}">${fmt}</div><div class="tk-ch ${chg >= 0 ? 'up' : 'dn'}">${chg >= 0 ? '▲' : '▼'} ${Math.abs(pct).toFixed(2)}%</div><span class="tk-badge live-badge">LIVE</span>`;
+      } else {
+        el.innerHTML = `<div class="tk-sym">${lbl}</div><div class="tk-px" style="color:var(--t4)">—</div><div class="tk-ch" style="color:var(--t4)">no data</div><span class="tk-badge sim-badge">N/A</span>`;
+      }
+      el.onclick = () => {
+        document.querySelectorAll('.tk').forEach(t => t.classList.remove('sel'));
+        el.classList.add('sel');
+        const aObj = findAsset(lbl) || {sym: lbl, tk, cc};
+        loadChart(aObj, curCTF);
+      };
+    })(tk, lbl, cc, el);
+  }
 }
 
 function findAsset(sym) {
