@@ -6,3 +6,4 @@
   from = "/api/quote"
   to = "/.netlify/functions/quote"
   status = 200
+
